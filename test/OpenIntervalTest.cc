@@ -10,3 +10,9 @@ TEST(OpenIntervalTest, isIntersectedOverlappingLeft) {
     OpenInterval another = OpenIntervalBuilder().min(1).max(7).build();
     EXPECT_TRUE(one.isIntersected(another));
 }
+
+TEST(OpenIntervalTest, isIntersectedOverlappingLeftEqualMin) {
+    OpenInterval one = OpenIntervalBuilder().min(3).max(14).build();
+    OpenInterval another = OpenIntervalBuilder().min(3).max(7).build();
+    EXPECT_TRUE(one.isIntersected(another));
+}
