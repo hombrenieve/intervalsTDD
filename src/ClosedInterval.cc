@@ -5,7 +5,7 @@ ClosedInterval::ClosedInterval(double min, double max) :
     max(max)
 { }
 
-bool ClosedInterval::isIntersected(const ClosedInterval& another) {
+bool ClosedInterval::isIntersected(const ClosedInterval& another) const {
     return this->isIncluded(another.min) ||
         this->isIncluded(another.max)||
         another.isIncluded(this->min);

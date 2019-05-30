@@ -5,7 +5,7 @@ class ClosedInterval {
 public:
     ClosedInterval(double min, double max);
 
-    bool isIntersected(const ClosedInterval& another);
+    bool isIntersected(const ClosedInterval& another) const;
 
 private:
     double min;
