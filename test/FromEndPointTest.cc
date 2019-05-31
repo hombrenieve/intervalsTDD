@@ -71,3 +71,56 @@ TEST_F(FromEndPointTest, isLeftEqualsOneIncluded) {
     EXPECT_TRUE(one->isLeftOf(another));
 }
 
+TEST_F(FromEndPointTest, isLeftEqualsAnotherIncluded) {
+    one = EndPointBuilder().point(3).notIncluded().from().build();
+    another = EndPointBuilder().point(3).included().from().build();
+
+    EXPECT_FALSE(one->isLeftOf(another));
+}
+
+TEST_F(FromEndPointTest, isLeftEqualsNoneIncluded) {
+    one = EndPointBuilder().point(3).notIncluded().from().build();
+    another = EndPointBuilder().point(3).notIncluded().from().build();
+
+    EXPECT_FALSE(one->isLeftOf(another));
+}
+
+
+
+
+
+TEST_F(FromEndPointTest, isRightTrueBothIncluded) {
+    one = EndPointBuilder().point(6).included().from().build();
+    another = EndPointBuilder().point(3).included().from().build();
+
+    EXPECT_TRUE(one->isRightOf(another));
+}
+
+TEST_F(FromEndPointTest, isRightFalseBothIncluded) {
+    one = EndPointBuilder().point(3).included().from().build();
+    another = EndPointBuilder().point(6).included().from().build();
+
+    EXPECT_FALSE(one->isRightOf(another));
+}
+
+TEST_F(FromEndPointTest, isRightTrueOneIncluded) {
+    one = EndPointBuilder().point(6).included().from().build();
+    another = EndPointBuilder().point(3).notIncluded().from().build();
+
+    EXPECT_TRUE(one->isRightOf(another));
+}
+
+TEST_F(FromEndPointTest, isRightTrueAnotherIncluded) {
+    one = EndPointBuilder().point(6).notIncluded().from().build();
+    another = EndPointBuilder().point(3).included().from().build();
+
+    EXPECT_TRUE(one->isRightOf(another));
+}
+
+TEST_F(FromEndPointTest, isRightTrueNoneIncluded) {
+    one = EndPointBuilder().point(6).notIncluded().from().build();
+    another = EndPointBuilder().point(3).notIncluded().from().build();
+
+    EXPECT_TRUE(one->isRightOf(another));
+}
+
