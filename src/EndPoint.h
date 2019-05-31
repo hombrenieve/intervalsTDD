@@ -18,9 +18,12 @@ private:
     bool equals(const EndPoint* another) const;
     bool bothIncluded(const EndPoint* another) const;
 
+    bool isLeftWhenEquals(const EndPoint* another) const;
+    bool isRightWhenEquals(const EndPoint* another) const;
+
 protected:
-    virtual bool isLeftWhenEquals(const EndPoint* another) const = 0;
-    virtual bool isRightWhenEquals(const EndPoint* another) const = 0;
+    virtual bool isLeftWhenNotIncluded() const = 0;
+    virtual bool isRightWhenNotIncluded() const = 0;
 };
 
 #endif

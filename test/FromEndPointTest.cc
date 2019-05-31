@@ -185,3 +185,9 @@ TEST_F(FromEndPointTest, isLeftOfUntilEqualsBothIncluded) {
     EXPECT_FALSE(one->isLeftOf(another));
 }
 
+TEST_F(FromEndPointTest, isLeftOfUntilEqualsOneIncluded) {
+    one = EndPointBuilder().point(3).included().from().build();
+    another = EndPointBuilder().point(3).notIncluded().until().build();
+
+    EXPECT_FALSE(one->isLeftOf(another));
+}

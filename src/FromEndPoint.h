@@ -8,8 +8,8 @@ public:
     FromEndPoint(double value, bool isIncluded);
 
 protected:
-    bool isLeftWhenEquals(const EndPoint* another) const override;
-    bool isRightWhenEquals(const EndPoint* another) const override;
+    bool isLeftWhenNotIncluded() const override;
+    bool isRightWhenNotIncluded() const override;
 
 };
 

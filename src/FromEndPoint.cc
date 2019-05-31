@@ -4,16 +4,10 @@ FromEndPoint::FromEndPoint(double value, bool isIncluded) :
     EndPoint(value, isIncluded)
 { }
 
-bool FromEndPoint::isLeftWhenEquals(const EndPoint* another) const {
-    if(this->isIncluded()) {
-        return another->isRightOf(this);
-    }
+bool FromEndPoint::isLeftWhenNotIncluded() const {
     return false;
 }
 
-bool FromEndPoint::isRightWhenEquals(const EndPoint* another) const {
-    if(this->isIncluded()) {
-        return another->isLeftOf(this);
-    }
+bool FromEndPoint::isRightWhenNotIncluded() const {
     return true;
 }
