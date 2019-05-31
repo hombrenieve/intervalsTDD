@@ -15,6 +15,9 @@ private:
     double value;
     bool isIncludedValue;
 
+    bool equals(const EndPoint* another) const;
+    bool bothIncluded(const EndPoint* another) const;
+
 protected:
     virtual bool isLeftWhenEquals(const EndPoint* another) const = 0;
     virtual bool isRightWhenEquals(const EndPoint* another) const = 0;
