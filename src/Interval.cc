@@ -16,8 +16,8 @@ double Interval::getMax() const {
     return this->max;
 }
 
-bool Interval::isIntersected(const Interval& another) const {
-    return this->isIncluded(another.min) ||
-        this->isIncluded(another.max)||
-        another.isIncluded(this->min);
+bool Interval::isIntersected(const Interval* another) const {
+    return this->isIncluded(another->getMin()) ||
+        this->isIncluded(another->getMax())||
+        another->isIncluded(this->getMin());
 }

@@ -5,5 +5,5 @@ ClosedInterval::ClosedInterval(double min, double max) :
 { }
 
 bool ClosedInterval::isIncluded(double value) const {
-    return this->min <= value && value <= this->max;
+    return this->getMin() <= value && value <= this->getMax();
 }

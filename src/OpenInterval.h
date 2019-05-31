@@ -6,7 +6,7 @@ class OpenInterval : public Interval {
 public:
     OpenInterval(double min, double max);
 
-    bool isIntersected(const Interval& another) const override;
+    bool isIntersected(const Interval* another) const override;
 
 private:
     bool isIncluded(double value) const override;

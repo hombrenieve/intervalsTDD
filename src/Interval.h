@@ -5,7 +5,7 @@ class Interval {
 public:
     Interval(double min, double max);
     virtual ~Interval() = default;
-    virtual bool isIntersected(const Interval& another) const;
+    virtual bool isIntersected(const Interval* another) const;
 
     double getMin() const;
     double getMax() const;
