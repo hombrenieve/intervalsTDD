@@ -64,3 +64,21 @@ TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByLeft) {
     another = IntervalBuilder().min(0).max(2).open().build();
     EXPECT_FALSE(one->isIntersected(*another));
 }
+
+TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByRight) {
+    one = IntervalBuilder().min(3).max(14).open().build();
+    another = IntervalBuilder().min(16).max(22).open().build();
+    EXPECT_FALSE(one->isIntersected(*another));
+}
+
+TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByLeftSamePoint) {
+    one = IntervalBuilder().min(3).max(14).open().build();
+    another = IntervalBuilder().min(0).max(3).open().build();
+    EXPECT_FALSE(one->isIntersected(*another));
+}
+
+TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByRightSamePoint) {
+    one = IntervalBuilder().min(3).max(14).open().build();
+    another = IntervalBuilder().min(14).max(19).open().build();
+    EXPECT_FALSE(one->isIntersected(*another));
+}

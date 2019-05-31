@@ -1,9 +1,12 @@
 #include "Interval.h"
+#include <cassert>
 
 Interval::Interval(double min, double max) :
     min(min),
     max(max)
-{ }
+{ 
+    assert(min < max);
+}
 
 double Interval::getMin() const {
     return this->min;

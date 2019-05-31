@@ -70,3 +70,15 @@ TEST_F(ClosedIntervalTest, isIntersectedNotOverlappingByRight) {
     another = IntervalBuilder().min(16).max(22).closed().build();
     EXPECT_FALSE(one->isIntersected(*another));
 }
+
+TEST_F(ClosedIntervalTest, isIntersectedNotOverlappingByLeftSamePoint) {
+    one = IntervalBuilder().min(3).max(14).closed().build();
+    another = IntervalBuilder().min(0).max(3).closed().build();
+    EXPECT_TRUE(one->isIntersected(*another));
+}
+
+TEST_F(ClosedIntervalTest, isIntersectedNotOverlappingByRightSamePoint) {
+    one = IntervalBuilder().min(3).max(14).closed().build();
+    another = IntervalBuilder().min(14).max(19).closed().build();
+    EXPECT_TRUE(one->isIntersected(*another));
+}
