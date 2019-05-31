@@ -6,7 +6,7 @@
 { }
 
 bool EndPoint::isLeftOf(const EndPoint& another) const {
-    return true;
+    return this->point <= another.point;
 }
 
 bool EndPoint::isRightOf(const EndPoint& another) const {

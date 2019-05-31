@@ -10,3 +10,10 @@ TEST(EndPointTest, isLeftTrueBothIncluded) {
 
     EXPECT_TRUE(one.isLeftOf(another));
 }
+
+TEST(EndPointTest, isLeftFalseBothIncluded) {
+    EndPoint one = EndPointBuilder().point(6).included().build();
+    EndPoint another = EndPointBuilder().point(3).included().build();
+
+    EXPECT_FALSE(one.isLeftOf(another));
+}
