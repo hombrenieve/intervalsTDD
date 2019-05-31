@@ -3,6 +3,7 @@
 
 #include "ClosedInterval.h"
 #include "OpenInterval.h"
+#include "ClosedOpenInterval.h"
 
 
 class IntervalBuilder {
@@ -14,6 +15,7 @@ public:
 
     IntervalBuilder& open();
     IntervalBuilder& closed();
+    IntervalBuilder& closedOpen();
 
     Interval* build();
 
@@ -23,7 +25,8 @@ private:
 
     enum class IntervalType {
         OPEN,
-        CLOSED
+        CLOSED,
+        CLOSED_OPEN
     } type;
 
 };

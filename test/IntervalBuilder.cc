@@ -26,12 +26,19 @@ IntervalBuilder& IntervalBuilder::closed() {
     return *this;
 }
 
+IntervalBuilder& IntervalBuilder::closedOpen() {
+    this->type = IntervalType::CLOSED_OPEN;
+    return *this;
+}
+
 Interval* IntervalBuilder::build() {
     switch(this->type) {
         case IntervalType::CLOSED:
             return new ClosedInterval(this->minValue, this->maxValue);
         case IntervalType::OPEN:
             return new OpenInterval(this->minValue, this->maxValue);
+        case IntervalType::CLOSED_OPEN:
+            return new ClosedOpenInterval(this->minValue, this->maxValue);
         default:
             break;
     }
