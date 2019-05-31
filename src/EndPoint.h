@@ -3,14 +3,21 @@
 
 class EndPoint {
 public:
-    EndPoint(double point, bool isIncluded);
+    EndPoint(double value, bool isIncluded);
 
-    bool isLeftOf(const EndPoint& another) const;
-    bool isRightOf(const EndPoint& another) const;
+    bool isLeftOf(const EndPoint* another) const;
+    bool isRightOf(const EndPoint* another) const;
+
+    double getValue() const;
+    bool isIncluded() const;
 
 private:
-    double point;
-    bool isIncluded;
+    double value;
+    bool isIncludedValue;
+
+protected:
+    virtual bool isLeftWhenEquals(const EndPoint* another) const = 0;
+    virtual bool isRightWhenEquals(const EndPoint* another) const = 0;
 };
 
 #endif

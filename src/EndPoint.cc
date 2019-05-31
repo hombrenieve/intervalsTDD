@@ -1,14 +1,27 @@
 #include "EndPoint.h"
 
- EndPoint::EndPoint(double point, bool isIncluded) :
-    point(point),
-    isIncluded(isIncluded)
+ EndPoint::EndPoint(double value, bool isIncluded) :
+    value(value),
+    isIncludedValue(isIncluded)
 { }
 
-bool EndPoint::isLeftOf(const EndPoint& another) const {
-    return this->point <= another.point;
+bool EndPoint::isLeftOf(const EndPoint* another) const {
+    if(this->value == another->value) {
+        return this->isLeftWhenEquals(another);
+    }
+    return this->value < another->value;
 }
 
-bool EndPoint::isRightOf(const EndPoint& another) const {
-    return false;
+bool EndPoint::isRightOf(const EndPoint* another) const {
+    if(this->value == another->value) {
+        return this->isRightWhenEquals(another);
+    }
+    return another->value < this->value;
 }
+
+ double EndPoint::getValue() const {
+     return this->value;
+ }
+ bool EndPoint::isIncluded() const {
+     return this->isIncludedValue;
+ }

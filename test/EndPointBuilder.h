@@ -10,12 +10,18 @@ public:
     EndPointBuilder& point(double value);
     EndPointBuilder& included();
     EndPointBuilder& notIncluded();
+    EndPointBuilder& from();
+    EndPointBuilder& until();
 
-    EndPoint build();
+    EndPoint* build();
 
 private:
     double value;
     bool isIncluded;
+    enum class EndPointType {
+        FROM,
+        UNTIL
+    } type;
 };
 
 #endif
