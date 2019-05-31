@@ -1,17 +1,13 @@
 #ifndef _CLOSED_INTERVAL_H_
 #define _CLOSED_INTERVAL_H_
+#include "Interval.h"
 
-class ClosedInterval {
+class ClosedInterval : public Interval{
 public:
     ClosedInterval(double min, double max);
 
-    bool isIntersected(const ClosedInterval& another) const;
-
 private:
-    double min;
-    double max;
-
-    bool isIncluded(double value) const;
+    bool isIncluded(double value) const override;
 
 };
 
