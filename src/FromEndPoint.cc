@@ -15,5 +15,11 @@ bool FromEndPoint::isLeftWhenEquals(const EndPoint* another) const {
 }
 
 bool FromEndPoint::isRightWhenEquals(const EndPoint* another) const {
+    if(this->isIncluded() && another->isIncluded()) {
+        return false;
+    }
+    if(this->isIncluded()) {
+        return another->isLeftOf(this);
+    }
     return true;
 }
