@@ -1,4 +1,5 @@
 #include "IntervalBuilder.h"
+#include "EndPointBuilder.h"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -6,79 +7,87 @@ using namespace testing;
 
 class OpenIntervalTest : public Test {
 protected:
-    Interval* one;
-    Interval* another;
-
-    OpenIntervalTest() : 
-        one(nullptr),
-        another(nullptr)
-    { }
-
-    ~OpenIntervalTest() {
-        if(this->one)
-            delete one;
-        if(this->another)
-            delete another;
-    }
+    IntervalBuilder intervalBuilder;
+    EndPointBuilder endPointBuilder;
 };
 
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingLeft) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(1).max(7).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(1).notIncluded().buildFrom())
+        .until(endPointBuilder.point(7).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingLeftEqualMin) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(3).max(7).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(7).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingEquals) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(3).max(14).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingByRight) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(7).max(17).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(7).notIncluded().buildFrom())
+        .until(endPointBuilder.point(17).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingByBoth) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(0).max(17).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(0).notIncluded().buildFrom())
+        .until(endPointBuilder.point(17).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedOverlappingByInside) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(5).max(10).open().build();
-    EXPECT_TRUE(one->isIntersected(another));
+   Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(5).notIncluded().buildFrom())
+        .until(endPointBuilder.point(10).notIncluded().buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByLeft) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(0).max(2).open().build();
-    EXPECT_FALSE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(0).notIncluded().buildFrom())
+        .until(endPointBuilder.point(2).notIncluded().buildUntil()).build());
+    EXPECT_FALSE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByRight) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(16).max(22).open().build();
-    EXPECT_FALSE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(16).notIncluded().buildFrom())
+        .until(endPointBuilder.point(22).notIncluded().buildUntil()).build());
+    EXPECT_FALSE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByLeftSamePoint) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(0).max(3).open().build();
-    EXPECT_FALSE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(0).notIncluded().buildFrom())
+        .until(endPointBuilder.point(3).notIncluded().buildUntil()).build());
+    EXPECT_FALSE(one.isIntersected(another));
 }
 
 TEST_F(OpenIntervalTest, isIntersectedNotOverlappingByRightSamePoint) {
-    one = IntervalBuilder().min(3).max(14).open().build();
-    another = IntervalBuilder().min(14).max(19).open().build();
-    EXPECT_FALSE(one->isIntersected(another));
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).notIncluded().buildFrom())
+        .until(endPointBuilder.point(14).notIncluded().buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(14).notIncluded().buildFrom())
+        .until(endPointBuilder.point(19).notIncluded().buildUntil()).build());
+    EXPECT_FALSE(one.isIntersected(another));
 }

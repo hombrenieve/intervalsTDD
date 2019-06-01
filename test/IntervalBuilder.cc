@@ -1,47 +1,21 @@
 #include "IntervalBuilder.h"
 
 IntervalBuilder::IntervalBuilder() :
-    minValue(0),
-    maxValue(1),
-    type(IntervalType::CLOSED)
+    fromValue(0, true),
+    untilValue(0, false)
 { }
 
-IntervalBuilder& IntervalBuilder::min(double min) {
-    this->minValue = min;
+IntervalBuilder& IntervalBuilder::from(const FromEndPoint& fromValue) {
+    this->fromValue = fromValue;
     return *this;
 }
 
-IntervalBuilder& IntervalBuilder::max(double max) {
-    this->maxValue = max;
+IntervalBuilder& IntervalBuilder::until(const UntilEndPoint& untilValue) {
+    this->untilValue = untilValue;
     return *this;
 }
 
-IntervalBuilder& IntervalBuilder::open() {
-    this->type = IntervalType::OPEN;
-    return *this;
-}
-
-IntervalBuilder& IntervalBuilder::closed() {
-    this->type = IntervalType::CLOSED;
-    return *this;
-}
-
-IntervalBuilder& IntervalBuilder::closedOpen() {
-    this->type = IntervalType::CLOSED_OPEN;
-    return *this;
-}
-
-Interval* IntervalBuilder::build() {
-    switch(this->type) {
-        case IntervalType::CLOSED:
-            return new ClosedInterval(this->minValue, this->maxValue);
-        case IntervalType::OPEN:
-            return new OpenInterval(this->minValue, this->maxValue);
-        case IntervalType::CLOSED_OPEN:
-            return new ClosedOpenInterval(this->minValue, this->maxValue);
-        default:
-            break;
-    }
-    return nullptr;
+Interval IntervalBuilder::build() {
+    return Interval(this->fromValue, this->untilValue);
 }
 

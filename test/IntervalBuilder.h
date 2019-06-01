@@ -1,34 +1,21 @@
 #ifndef __INTERVAL_BUILDER_H_
 #define __INTERVAL_BUILDER_H_
 
-#include "ClosedInterval.h"
-#include "OpenInterval.h"
-#include "ClosedOpenInterval.h"
+#include "Interval.h"
 
 
 class IntervalBuilder {
 public:
     IntervalBuilder();
 
-    IntervalBuilder& min(double min);
-    IntervalBuilder& max(double max);
+    IntervalBuilder& from(const FromEndPoint& fromValue);
+    IntervalBuilder& until(const UntilEndPoint& untilValue);
 
-    IntervalBuilder& open();
-    IntervalBuilder& closed();
-    IntervalBuilder& closedOpen();
-
-    Interval* build();
+    Interval build();
 
 private:
-    double minValue;
-    double maxValue;
-
-    enum class IntervalType {
-        OPEN,
-        CLOSED,
-        CLOSED_OPEN
-    } type;
-
+    FromEndPoint fromValue;
+    UntilEndPoint untilValue;
 };
 
 #endif 
