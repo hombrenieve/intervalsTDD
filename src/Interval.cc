@@ -2,18 +2,18 @@
 #include <cassert>
 
 Interval::Interval(double min, double max) :
-    min(min),
-    max(max)
+    from(min, true),
+    until(max, true)
 { 
     assert(min < max);
 }
 
 double Interval::getMin() const {
-    return this->min;
+    return this->from.getValue();
 }
 
 double Interval::getMax() const {
-    return this->max;
+    return this->until.getValue();
 }
 
 bool Interval::isIntersected(const Interval* another) const {

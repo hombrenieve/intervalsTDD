@@ -6,7 +6,7 @@ OpenInterval::OpenInterval(double min, double max) :
 
 bool OpenInterval::isIntersected(const Interval* another) const {
     return Interval::isIntersected(another) ||
-        (this->getMin() == another->getMin() && this->max == another->getMax());
+        (this->getMin() == another->getMin() && this->getMax() == another->getMax());
 }
 
 bool OpenInterval::isIncluded(double value) const {

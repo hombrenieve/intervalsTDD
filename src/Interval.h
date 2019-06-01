@@ -1,6 +1,9 @@
 #ifndef _INTERVAL_H_
 #define _INTERVAL_H_
 
+#include "FromEndPoint.h"
+#include "UntilEndPoint.h"
+
 class Interval {
 public:
     Interval(double min, double max);
@@ -11,8 +14,8 @@ public:
     double getMax() const;
 
 protected:
-    double min;
-    double max;
+    FromEndPoint from;
+    UntilEndPoint until;
 
     virtual bool isIncluded(double value) const = 0;
 };
