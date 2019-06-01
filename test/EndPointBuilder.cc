@@ -1,11 +1,8 @@
 #include "EndPointBuilder.h"
-#include "FromEndPoint.h"
-#include "UntilEndPoint.h"
 
 EndPointBuilder::EndPointBuilder() : 
     value(0),
-    isIncluded(true),
-    type(EndPointType::FROM)
+    isIncluded(true)
 { }
 
 EndPointBuilder& EndPointBuilder::point(double value) {
@@ -23,20 +20,11 @@ EndPointBuilder& EndPointBuilder::notIncluded() {
     return *this;
 }
 
-EndPointBuilder& EndPointBuilder::from() {
-    this->type = EndPointType::FROM;
-    return *this;
+FromEndPoint EndPointBuilder::buildFrom() {
+    return FromEndPoint(this->value, this->isIncluded);
 }
 
 
-EndPointBuilder& EndPointBuilder::until() {
-    this->type = EndPointType::UNTIL;
-    return *this;
-}
-
-EndPoint* EndPointBuilder::build() {
-    if(this->type == EndPointType::FROM) {
-        return new FromEndPoint(this->value, this->isIncluded);
-    }
-    return new UntilEndPoint(this->value, this->isIncluded);
+UntilEndPoint EndPointBuilder::buildUntil() {
+    return UntilEndPoint(this->value, this->isIncluded);
 }

@@ -2,6 +2,8 @@
 #define _ENDPOINTBUILDER_H_
 
 #include "EndPoint.h"
+#include "UntilEndPoint.h"
+#include "FromEndPoint.h"
 
 class EndPointBuilder {
 public:
@@ -10,18 +12,12 @@ public:
     EndPointBuilder& point(double value);
     EndPointBuilder& included();
     EndPointBuilder& notIncluded();
-    EndPointBuilder& from();
-    EndPointBuilder& until();
-
-    EndPoint* build();
+    FromEndPoint buildFrom();
+    UntilEndPoint buildUntil();
 
 private:
     double value;
     bool isIncluded;
-    enum class EndPointType {
-        FROM,
-        UNTIL
-    } type;
 };
 
 #endif
