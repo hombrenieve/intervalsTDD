@@ -9,36 +9,18 @@ bool EndPoint::equals(const EndPoint* another) const {
     return this->value == another->value;
 }
 
-bool EndPoint::bothIncluded(const EndPoint* another) const {
-    return this->isIncluded() and another->isIncluded();
-}
-
-bool EndPoint::isLeftWhenEquals(const EndPoint* another) const {
-    if(this->isIncluded()) {
-        return another->isRightWhenNotIncluded();
-    }
-    return this->isLeftWhenNotIncluded();
-}
-
-bool EndPoint::isRightWhenEquals(const EndPoint* another) const {
-    if(this->isIncluded()) {
-        return another->isLeftWhenNotIncluded();
-    }
-    return this->isRightWhenNotIncluded();
-}
-
 bool EndPoint::isLeftOf(const EndPoint* another) const {
     if(this->equals(another)) {
-        return !this->bothIncluded(another) and 
-            this->isLeftWhenEquals(another);
+        return !this->isIncluded() and 
+            this->isLeftWhenNotIncluded();
     }
     return this->value < another->value;
 }
 
 bool EndPoint::isRightOf(const EndPoint* another) const {
     if(this->equals(another)) {
-        return !this->bothIncluded(another) and 
-            this->isRightWhenEquals(another);
+        return !this->isIncluded() and 
+            this->isRightWhenNotIncluded();
     }
     return another->value < this->value;
 }
