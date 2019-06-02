@@ -59,6 +59,30 @@ TEST_P(NonConflictingEndPointsIntervalTest, isIntersectedNotOverlappingByRight) 
     EXPECT_FALSE(one.isIntersected(another));
 }
 
-INSTANTIATE_TEST_SUITE_P(IntervalTest,
+TEST_P(NonConflictingEndPointsIntervalTest, isIntersectedOverlappingLeftEqualMin) {
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).included(std::get<0>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(14).included(std::get<1>(this->GetParam())).buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(3).included(std::get<2>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(7).included(std::get<3>(this->GetParam())).buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
+}
+
+TEST_P(NonConflictingEndPointsIntervalTest, isIntersectedOverlappingLeftEqualMax) {
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).included(std::get<0>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(14).included(std::get<1>(this->GetParam())).buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(5).included(std::get<2>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(14).included(std::get<3>(this->GetParam())).buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
+}
+
+TEST_P(NonConflictingEndPointsIntervalTest, isIntersectedOverlappingEquals) {
+    Interval one(intervalBuilder.from(endPointBuilder.point(3).included(std::get<0>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(14).included(std::get<1>(this->GetParam())).buildUntil()).build());
+    Interval another(intervalBuilder.from(endPointBuilder.point(3).included(std::get<2>(this->GetParam())).buildFrom())
+        .until(endPointBuilder.point(14).included(std::get<3>(this->GetParam())).buildUntil()).build());
+    EXPECT_TRUE(one.isIntersected(another));
+}
+
+INSTANTIATE_TEST_SUITE_P(ExpectTrue,
                         NonConflictingEndPointsIntervalTest,
                         Combine(Bool(), Bool(), Bool(), Bool()));
