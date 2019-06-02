@@ -12,6 +12,7 @@ public:
     EndPointBuilder& point(double value);
     EndPointBuilder& included();
     EndPointBuilder& notIncluded();
+    EndPointBuilder& included(bool isIncluded);
     FromEndPoint buildFrom();
     UntilEndPoint buildUntil();
 

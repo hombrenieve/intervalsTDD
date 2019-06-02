@@ -15,6 +15,11 @@ EndPointBuilder& EndPointBuilder::included() {
     return *this;
 }
 
+EndPointBuilder& EndPointBuilder::included(bool isIncluded) {
+    this->isIncluded = isIncluded;
+    return *this;
+}
+
 EndPointBuilder& EndPointBuilder::notIncluded() {
     this->isIncluded = false;
     return *this;
